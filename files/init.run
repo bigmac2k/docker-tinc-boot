@@ -1,0 +1,13 @@
+#! /usr/bin/execlineb -P
+
+with-contenv
+importas -i TOKEN TTOKEN
+importas -i PUBLIC TPUBLIC
+importas -i PORT TPORT
+importas -D dnet NETWORK TNETWORK
+backtick -D "" -n content { redirfd -w 2 /dev/null ls -A /etc/tinc/${NETWORK} }
+importas content content
+
+if { test ! -d /etc/tinc/${NETWORK} -o -z ${content} }
+foreground { /usr/local/bin/tinc-boot gen --standalone -a ${PUBLIC} -t ${TOKEN} --network ${NETWORK} --port ${PORT} }
+redirfd -w 1 /etc/tinc/${NETWORK}/token echo ${TOKEN}

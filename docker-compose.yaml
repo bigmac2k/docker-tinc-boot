@@ -1,0 +1,20 @@
+version: "3.3"
+
+services:
+  tinc:
+    build: .
+    hostname: <hostname>
+    volumes:
+      - "<PATH>:/etc/tinc/dnet"
+    ports:
+      - "8655:8655"
+      - "<PORT>:<PORT>"
+      - "<PORT>:<PORT>/udp"
+    environment:
+      TTOKEN: <TOKEN>
+      TPUBLIC: <PUBLICIP>
+      TPORT: <PORT>
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - "/dev/net/tun"

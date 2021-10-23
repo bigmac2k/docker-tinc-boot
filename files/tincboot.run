@@ -1,0 +1,7 @@
+#! /usr/bin/execlineb -P
+
+with-contenv
+importas -D dnet NETWORK TNETWORK
+backtick -n TOKEN { cat /etc/tinc/${NETWORK}/token }
+importas -i TOKEN TOKEN
+/usr/local/bin/tinc-boot bootnode --binding ":8655" --token ${TOKEN} --dir /etc/tinc/${NETWORK}

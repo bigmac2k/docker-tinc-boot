@@ -1,0 +1,5 @@
+#! /usr/bin/execlineb -P
+
+with-contenv
+importas -D dnet NETWORK TNETWORK
+execline-cd /etc/tinc/${NETWORK} /usr/sbin/tincd -n ${NETWORK} -D
